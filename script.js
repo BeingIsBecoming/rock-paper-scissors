@@ -1,34 +1,31 @@
-let humanScore = 0;
-let computerScore = 0;
-let getHumanChoice = prompt("Rock, paper, scissors...");
-let getComputerChoice = ['Rock', 'Paper', 'Scissors'][Math.floor(Math.random() * 3)];
+// ROCK PAPER SCISSORS
+const choices = ["Rock", "Paper", "Scissors"]; 
+const playerDisplay = document.getElementById("playerDisplay");
+const computerDisplay = document.getElementById("computerDisplay");
+const resultDisplay = document.getElementById("resultDisplay");
 
-// CONSOLE TESTS
-console.log("YOU: " + getHumanChoice.toUpperCase());
-console.log("COMPUTER: " + getComputerChoice.toUpperCase());
-        
-// GAME LOGIC FUNCTION 
+function playGame(playerChoice){
+    const computerChoice = choices[Math.floor(Math.random()*3)];
+    let result = "";
 
-/* function playRound(humanChoice, computerChoice) {
-    if (humanSelection === "Rock" && computerSelection === "Scissors" 
-    || humanSelection === "Paper" && computerSelection === "Rock"             
-    || humanSelection === "Scissors" && computerSelection === "Paper") {
-    humanScore++;
-    player.textContent = `Your score: ${playerScore}`;
-    roundResult.textContent = `You win! ${humanSelection} beats ${computerSelection}.`;
+    if(playerChoice === computerChoice){
+        result = "It's a draw!";
+    }
+    else{
+        switch(playerChoice){
+            case "Rock":
+                result = (computerChoice === "Scissors") ? "YOU WIN!" : "YOU LOSE!";
+                break;
+            case "Paper":
+                result = (computerChoice === "Rock") ? "YOU WIN!" : "YOU LOSE!";
+                break;
+            case "Scissors":
+                result = (computerChoice === "Paper") ? "YOU WIN!" : "YOU LOSE!";
+                break;
+        }
+    }
 
-    } else if (humanSelection === "Rock" && computerSelection === "Paper"
-    || humanSelection === "Paper" && computerSelection === "Scissors" 
-    || humanSelection === "Scissors" && computerSelection === "Rock") {
-    computerScore++;
-    computer.textContent = `Computer score: ${computerScore}`;
-    roundResult.textContent = `You lose! ${computerSelection} beats ${humanSelection}.`;
-
-    } else {                                                                   
-    roundResult.textContent = `It's a draw! You both have ${humanSelection}.`
-    };
-            
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-
-    playRound(humanSelection, computerSelection); */ 
+    playerDisplay.textContent = `PLAYER: ${playerChoice}`;
+    computerDisplay.textContent = `COMPUTER: ${computerChoice}`;
+    resultDisplay.textContent = result;
+}
